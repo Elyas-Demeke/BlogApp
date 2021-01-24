@@ -26,7 +26,7 @@ SECRET_KEY = 'n_f634&gqwzx_5%dfa$1f2sf^fbi#9^6q+#1fn05)!-o^&ji#0'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'elyas-django-blog-app.herokuapp.com/'
+    'elyas-django-blog-app.herokuapp.com'
 ]
 
 if DEBUG:
@@ -96,8 +96,6 @@ TEMPLATES = [
 
 AUTH_USER_MODEL = 'account.Account'
 
-import Memo.wsgi
-WSGI_APPLICATION = Memo.wsgi.application
 
 
 # Database
@@ -116,8 +114,6 @@ WSGI_APPLICATION = Memo.wsgi.application
 #     }
 # }
 
-import dj_database_url
-prod_db  =  dj_database_url.config(conn_max_age=500)
 
 DATABASES = {
     'default': {
@@ -125,9 +121,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-DATABASES['default'].update(prod_db)
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -174,4 +167,9 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+import dj_database_url
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)

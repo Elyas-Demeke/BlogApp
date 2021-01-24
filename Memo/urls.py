@@ -40,7 +40,7 @@ from blog.views import (
 urlpatterns = [
     # MY APPS URLS
     path('admin/', admin.site.urls),
-    path('memo_app/', include('memo_app.urls')),
+    # path('memo_app/', include('memo_app.urls')),
     path('', home_screen_view, name='home'),
     path('register', registration_view, name='register'),
     path('logout', logout_view, name='logout'),
